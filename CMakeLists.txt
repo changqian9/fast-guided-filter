@@ -1,0 +1,12 @@
+cmake_minimum_required(VERSION 3.5)
+set(PROJECT_NAME fast-guided-filter)
+project(${PROJECT_NAME})
+set(CMAKE_CXX_STANDARD 11)
+#set(CMAKE_CXX_FLAGS "-msse4.1 -std=c++11")
+FIND_PACKAGE(OpenCV REQUIRED)
+INCLUDE_DIRECTORIES(${OpenCV_INCLUDE_DIRS})
+
+file(GLOB SOURCE_FILES ./*.cpp ./FastGuidedFilter/*.cpp)
+include_directories (./  /usr/local/include /usr/local/include/opencv /usr/local/include/opencv2)
+add_executable(${PROJECT_NAME} ${SOURCE_FILES})
+target_link_libraries(${PROJECT_NAME} ${OpenCV_LIBS})
