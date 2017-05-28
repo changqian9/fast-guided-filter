@@ -1,5 +1,5 @@
 # build dir
-cmake-build-debug
+cmake-build-debug/
 # Compiled Object files
 *.slo
 *.lo
@@ -28,6 +28,6 @@ cmake-build-debug
 *.exe
 *.out
 *.app
-.idea
+.idea/
 .git
 .git-credentials

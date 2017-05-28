@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 3.5)
 set(PROJECT_NAME fast-guided-filter)
 project(${PROJECT_NAME})
 set(CMAKE_CXX_STANDARD 11)
-#set(CMAKE_CXX_FLAGS "-msse4.1 -std=c++11")
 FIND_PACKAGE(OpenCV REQUIRED)
 INCLUDE_DIRECTORIES(${OpenCV_INCLUDE_DIRS})
 
