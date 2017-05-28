@@ -28,3 +28,6 @@ cmake-build-debug
 *.exe
 *.out
 *.app
+.idea
+.git
+.git-credentials
