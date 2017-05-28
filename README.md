@@ -29,43 +29,43 @@ clock_t end_time = clock();
  cout << "Running time is: " << static_cast<double>(end_time - start_time) / CLOCKS_PER_SEC * 1000 << "ms" << endl;
 ```
 
-[![Cat](./imgs/cat.png)]
+![Cat](./imgs/cat.png)
 
-- r=2,eps=0.1^2  - 0.4^2,s=1  time: 1.7ms
+- r=2,eps=0.1^2 -0.4^2,s=1  time: 1.7ms
 
-[![r=2, eps=0.1^2](./imgs/result_s:1_r:2_eps:0.100000^2.png)]
-[![r=2, eps=0.2^2](./imgs/result_s:1_r:2_eps:0.200000^2.png)]
-[![r=2, eps=0.4^2](./imgs/result_s:1_r:2_eps:0.400000^2.png)]
+![r=2, eps=0.1^2](./imgs/result_s:1_r:2_eps:0.100000^2.png)
+![r=2, eps=0.2^2](./imgs/result_s:1_r:2_eps:0.200000^2.png)
+![r=2, eps=0.4^2](./imgs/result_s:1_r:2_eps:0.400000^2.png)
 
-- r=2,eps=0.1^2  - 0.4^2,s=2 time: 0.6ms
+- r=2,eps=0.1^2 -0.4^2,s=2 time: 0.6ms
 
-[![r=2, eps=0.1^2](./imgs/result_s:2_r:2_eps:0.100000^2.png)]
-[![r=2, eps=0.2^2](./imgs/result_s:2_r:2_eps:0.200000^2.png)]
-[![r=2, eps=0.4^2](./imgs/result_s:2_r:2_eps:0.400000^2.png)]
+![r=2, eps=0.1^2](./imgs/result_s:2_r:2_eps:0.100000^2.png)
+![r=2, eps=0.2^2](./imgs/result_s:2_r:2_eps:0.200000^2.png)
+![r=2, eps=0.4^2](./imgs/result_s:2_r:2_eps:0.400000^2.png)
 
-- r=4,eps=0.1^2  - 0.4^2,s=1 time: 1.7ms
+- r=4,eps=0.1^2 -0.4^2,s=1 time: 1.7ms
 
-[![r=4, eps=0.1^2](./imgs/result_s:1_r:4_eps:0.100000^2.png)]
-[![r=4, eps=0.2^2](./imgs/result_s:1_r:4_eps:0.200000^2.png)]
-[![r=4, eps=0.4^2](./imgs/result_s:1_r:4_eps:0.400000^2.png)]
+![r=4, eps=0.1^2](./imgs/result_s:1_r:4_eps:0.100000^2.png)
+![r=4, eps=0.2^2](./imgs/result_s:1_r:4_eps:0.200000^2.png)
+![r=4, eps=0.4^2](./imgs/result_s:1_r:4_eps:0.400000^2.png)
 
-- r=4,eps=0.1^2  - 0.4^2,s=2 time: 0.6ms
+- r=4,eps=0.1^2 -0.4^2,s=2 time: 0.6ms
 
-[![r=4, eps=0.1^2](./imgs/result_s:2_r:4_eps:0.100000^2.png)]
-[![r=4, eps=0.2^2](./imgs/result_s:2_r:4_eps:0.200000^2.png)]
-[![r=4, eps=0.4^2](./imgs/result_s:2_r:4_eps:0.400000^2.png)]
+![r=4, eps=0.1^2](./imgs/result_s:2_r:4_eps:0.100000^2.png)
+![r=4, eps=0.2^2](./imgs/result_s:2_r:4_eps:0.200000^2.png)
+![r=4, eps=0.4^2](./imgs/result_s:2_r:4_eps:0.400000^2.png)
 
-- r=8,eps=0.1^2  - 0.4^2,s=1 time: 1.7ms
+- r=8,eps=0.1^2 -0.4^2,s=1 time: 1.7ms
 
-[![r=8, eps=0.1^2](./imgs/result_s:1_r:8_eps:0.100000^2.png)]
-[![r=8, eps=0.2^2](./imgs/result_s:1_r:8_eps:0.200000^2.png)]
-[![r=8, eps=0.4^2](./imgs/result_s:1_r:8_eps:0.400000^2.png)]
+![r=8, eps=0.1^2](./imgs/result_s:1_r:8_eps:0.100000^2.png)
+![r=8, eps=0.2^2](./imgs/result_s:1_r:8_eps:0.200000^2.png)
+![r=8, eps=0.4^2](./imgs/result_s:1_r:8_eps:0.400000^2.png)
 
-- r=8,eps=0.1^2  - 0.4^2,s=2 time: 0.6ms
+- r=8,eps=0.1^2 -0.4^2,s=2 time: 0.6ms
 
-[![r=8, eps=0.1^2](./imgs/result_s:2_r:8_eps:0.100000^2.png)]
-[![r=8, eps=0.2^2](./imgs/result_s:2_r:8_eps:0.200000^2.png)]
-[![r=8, eps=0.4^2](./imgs/result_s:2_r:8_eps:0.400000^2.png)]
+![r=8, eps=0.1^2](./imgs/result_s:2_r:8_eps:0.100000^2.png)
+![r=8, eps=0.2^2](./imgs/result_s:2_r:8_eps:0.200000^2.png)
+![r=8, eps=0.4^2](./imgs/result_s:2_r:8_eps:0.400000^2.png)
 
 
 ### Flash/no-flash denoising
