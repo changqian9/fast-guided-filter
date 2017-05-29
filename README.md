@@ -6,7 +6,12 @@ Fast Guided filter is an edge-preserving smoothing filter like the bilateral fil
 ## Usage
 
 The interface consists of one simple function `fastGuidedFilter` and a class `FastGuidedFilter`. If you have multiple images to filter with the same guidance image then use `FastGuidedFilter` class to avoid extra computations on initialization stage. The code supports single-channel and 3-channel (color) guidance images and `CV_8U`, `CV_8S`, `CV_16U`, `CV_16S`, `CV_32S`, `CV_32F` and `CV_64F` data types.
-
+```
+$ mkdir build && cd build
+$ cmake ..
+$ make
+$ ./fast-guided-filter
+```
 
 ## Examples
 
