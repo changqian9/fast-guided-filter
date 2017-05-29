@@ -10,7 +10,6 @@ int main() {
         for (int i = 0; i < 3; ++i) {
             for (int j = 0; j < 3; ++j) {
                 //Mat P = imread("../imgs/cat.jpg", CV_LOAD_IMAGE_GRAYSCALE);
-                //Mat P = imread("../imgs/people.png", CV_LOAD_IMAGE_ANYCOLOR);
                 Mat P = imread("../imgs/people.png", CV_LOAD_IMAGE_ANYCOLOR);
                 Mat I;
                 //cvtColor(P,I,CV_BGR2GRAY);

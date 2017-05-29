@@ -13,7 +13,7 @@ The interface consists of one simple function `fastGuidedFilter` and a class `Fa
 These examples are adapted from the [original MATLAB implementation](http://kaiminghe.com/eccv10/fast-guided-filter-code-v1.rar).
 
 ### Smoothing
-####P: GrayScale I: GrayScale 
+#### P: GrayScale I: GrayScale 
 
 ```c++
 int R[]={2,4,8};
@@ -80,7 +80,7 @@ for(int s=1;s<=2;++s) {
 ![r=8, eps=0.2^2](./imgs/result_s:2_r:8_eps:0.200000^2.png)
 ![r=8, eps=0.4^2](./imgs/result_s:2_r:8_eps:0.400000^2.png)
 
-####P: RGB(3 channels) I: GrayScale or RGB
+#### P: RGB(3 channels) I: GrayScale or RGB
 ```c++
 int R[]={2,4,8};
 double EPS[]={0.1,0.2,0.4};
@@ -88,7 +88,6 @@ Mat result;
 for(int s=1;s<=2;++s) {
 	for (int i = 0; i < 3; ++i) {
 		for (int j = 0; j < 3; ++j) {
-			//Mat P = imread("../imgs/people.png", CV_LOAD_IMAGE_ANYCOLOR);
 			Mat P = imread("../imgs/people.png", CV_LOAD_IMAGE_ANYCOLOR);
 			Mat I;
 			//cvtColor(P,I,CV_BGR2GRAY);
@@ -108,55 +107,55 @@ for(int s=1;s<=2;++s) {
 }
 ```
 ![People](./imgs/people.png)
-- I=grayscale r=2,eps=0.1^2 -0.4^2,s=1  time: 31ms
+- I=grayscale r=2,eps=0.1^2 -0.4^2,s=1  time: 6ms
 
-![I=grayscale r=2, eps=0.1^2](./imgs/I:gray_result_s:1_r:2_eps:0.010000^2.png)
-![I=grayscaler=2, eps=0.2^2](./imgs/I:gray_result_s:1_r:2_eps:0.020000^2.png)
-![I=grayscaler=2, eps=0.4^2](./imgs/I:gray_result_s:1_r:2_eps:0.040000^2.png)
+![I=grayscale r=2, eps=0.1^2](./imgs/I:gray_result_s:1_r:2_eps:0.100000^2.png)
+![I=grayscaler=2, eps=0.2^2](./imgs/I:gray_result_s:1_r:2_eps:0.200000^2.png)
+![I=grayscaler=2, eps=0.4^2](./imgs/I:gray_result_s:1_r:2_eps:0.400000^2.png)
 
-- I=RGB r=2,eps=0.1^2 -0.4^2,s=1  time: 86ms
+- I=RGB r=2,eps=0.1^2 -0.4^2,s=1  time: 16ms
 
 ![I=RGB r=2, eps=0.1^2](./imgs/I:color_result_s:1_r:2_eps:0.100000^2.png)
 ![I=RGB r=2, eps=0.2^2](./imgs/I:color_result_s:1_r:2_eps:0.200000^2.png)
 ![I=RGB r=2, eps=0.4^2](./imgs/I:color_result_s:1_r:2_eps:0.400000^2.png)
 
-- I=RGB r=2,eps=0.1^2 -0.4^2,s=2  time: 30ms
+- I=RGB r=2,eps=0.1^2 -0.4^2,s=2  time: 6ms
 
 ![I=RGB r=2, eps=0.1^2](./imgs/I:color_result_s:2_r:2_eps:0.100000^2.png)
 ![I=RGB r=2, eps=0.2^2](./imgs/I:color_result_s:2_r:2_eps:0.200000^2.png)
 ![I=RGB r=2, eps=0.4^2](./imgs/I:color_result_s:2_r:2_eps:0.400000^2.png)
 
-- I=grayscale r=4,eps=0.1^2 -0.4^2,s=1  time: 31ms
+- I=grayscale r=4,eps=0.1^2 -0.4^2,s=1  time: 6ms
 
-![I=grayscale r=4, eps=0.1^2](./imgs/I:gray_result_s:1_r:4_eps:0.010000^2.png)
-![I=grayscaler=4, eps=0.2^2](./imgs/I:gray_result_s:1_r:4_eps:0.020000^2.png)
-![I=grayscaler=4, eps=0.4^2](./imgs/I:gray_result_s:1_r:4_eps:0.040000^2.png)
+![I=grayscale r=4, eps=0.1^2](./imgs/I:gray_result_s:1_r:4_eps:0.100000^2.png)
+![I=grayscaler=4, eps=0.2^2](./imgs/I:gray_result_s:1_r:4_eps:0.200000^2.png)
+![I=grayscaler=4, eps=0.4^2](./imgs/I:gray_result_s:1_r:4_eps:0.400000^2.png)
 
-- I=RGB r=4,eps=0.1^2 -0.4^2,s=1  time: 86ms
+- I=RGB r=4,eps=0.1^2 -0.4^2,s=1  time: 16ms
 
 ![I=RGB r=4, eps=0.1^2](./imgs/I:color_result_s:1_r:4_eps:0.100000^2.png)
 ![I=RGB r=4, eps=0.2^2](./imgs/I:color_result_s:1_r:4_eps:0.200000^2.png)
 ![I=RGB r=4, eps=0.4^2](./imgs/I:color_result_s:1_r:4_eps:0.400000^2.png)
 
-- I=RGB r=4,eps=0.1^2 -0.4^2,s=2  time: 30ms
+- I=RGB r=4,eps=0.1^2 -0.4^2,s=2  time: 6ms
 
 ![I=RGB r=4, eps=0.1^2](./imgs/I:color_result_s:2_r:4_eps:0.100000^2.png)
 ![I=RGB r=4, eps=0.2^2](./imgs/I:color_result_s:2_r:4_eps:0.200000^2.png)
 ![I=RGB r=4, eps=0.4^2](./imgs/I:color_result_s:2_r:4_eps:0.400000^2.png)
 
- I=grayscale r=8,eps=0.1^2 -0.4^2,s=1  time: 31ms
+ I=grayscale r=8,eps=0.1^2 -0.4^2,s=1  time: 6ms
  
-![I=grayscale r=8, eps=0.1^2](./imgs/I:gray_result_s:1_r:8_eps:0.010000^2.png)
-![I=grayscaler=8, eps=0.2^2](./imgs/I:gray_result_s:1_r:8_eps:0.020000^2.png)
-![I=grayscaler=8, eps=0.4^2](./imgs/I:gray_result_s:1_r:8_eps:0.040000^2.png)
+![I=grayscale r=8, eps=0.1^2](./imgs/I:gray_result_s:1_r:8_eps:0.100000^2.png)
+![I=grayscaler=8, eps=0.2^2](./imgs/I:gray_result_s:1_r:8_eps:0.200000^2.png)
+![I=grayscaler=8, eps=0.4^2](./imgs/I:gray_result_s:1_r:8_eps:0.400000^2.png)
 
-- I=RGB r=8,eps=0.1^2 -0.4^2,s=1  time: 86ms
+- I=RGB r=8,eps=0.1^2 -0.4^2,s=1  time: 16ms
 
 ![I=RGB r=8, eps=0.1^2](./imgs/I:color_result_s:1_r:8_eps:0.100000^2.png)
 ![I=RGB r=8, eps=0.2^2](./imgs/I:color_result_s:1_r:8_eps:0.200000^2.png)
 ![I=RGB r=8, eps=0.4^2](./imgs/I:color_result_s:1_r:8_eps:0.400000^2.png)
 
-- I=RGB r=8,eps=0.1^2 -0.4^2,s=2  time: 30ms
+- I=RGB r=8,eps=0.1^2 -0.4^2,s=2  time: 6ms
 
 ![I=RGB r=8, eps=0.1^2](./imgs/I:color_result_s:2_r:8_eps:0.100000^2.png)
 ![I=RGB r=8, eps=0.2^2](./imgs/I:color_result_s:2_r:8_eps:0.200000^2.png)
