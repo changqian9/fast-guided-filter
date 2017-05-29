@@ -13,20 +13,33 @@ The interface consists of one simple function `fastGuidedFilter` and a class `Fa
 These examples are adapted from the [original MATLAB implementation](http://kaiminghe.com/eccv10/fast-guided-filter-code-v1.rar).
 
 ### Smoothing
+####P: GrayScale I: GrayScale 
 
 ```c++
-cv::Mat I = cv::imread("./imgs/cat.png", CV_LOAD_IMAGE_GRAYSCALE);
-cv::Mat p = I;
+int R[]={2,4,8};
+double EPS[]={0.1,0.2,0.4};
+Mat result;
+for(int s=1;s<=2;++s) {
+	for (int i = 0; i < 3; ++i) {
+		for (int j = 0; j < 3; ++j) {
+			Mat P =  cv::imread("./imgs/cat.png", CV_LOAD_IMAGE_GRAYSCALE);
+			Mat I;
+			I = P;
+			int r = R[i];
+			float eps = EPS[j]*EPS[j];
+			eps *= 255 * 255;
+			clock_t start_time1 = clock();
+			result = fastGuidedFilter(I, P, r, eps, s);
+			clock_t end_time1 = clock();
+			cout << "fastguidedfilter Running time is: "
+			     << static_cast<double>(end_time1 - start_time1) / CLOCKS_PER_SEC * 1000 << "ms" << endl;
+			string name = "result_s:" + to_string(s) + "_r:" + to_string(r) + "_eps:" + to_string(EPS[j]) + "^2.png";
+			imwrite(name, result);
+		}
+	}
+}
 
-int r = 4; // try r=2, 4, or 8
-double eps = 0.2 * 0.2; // try eps=0.1^2, 0.2^2, 0.4^2
-
-eps *= 255 * 255;   // Because the intensity range of our images is [0, 255]
-int s  = 1;// try s=1,2      make sure r/s  is an integer
-clock_t start_time = clock();
-cv::Mat q = fastGuidedFilter(I, p, r, eps,s);
-clock_t end_time = clock();
- cout << "Running time is: " << static_cast<double>(end_time - start_time) / CLOCKS_PER_SEC * 1000 << "ms" << endl;
+ 
 ```
 
 ![Cat](./imgs/cat.png)
@@ -67,7 +80,87 @@ clock_t end_time = clock();
 ![r=8, eps=0.2^2](./imgs/result_s:2_r:8_eps:0.200000^2.png)
 ![r=8, eps=0.4^2](./imgs/result_s:2_r:8_eps:0.400000^2.png)
 
+####P: RGB(3 channels) I: GrayScale or RGB
+```c++
+int R[]={2,4,8};
+double EPS[]={0.1,0.2,0.4};
+Mat result;
+for(int s=1;s<=2;++s) {
+	for (int i = 0; i < 3; ++i) {
+		for (int j = 0; j < 3; ++j) {
+			//Mat P = imread("../imgs/people.png", CV_LOAD_IMAGE_ANYCOLOR);
+			Mat P = imread("../imgs/people.png", CV_LOAD_IMAGE_ANYCOLOR);
+			Mat I;
+			//cvtColor(P,I,CV_BGR2GRAY);
+			I = P;
+			int r = R[i];
+			float eps = EPS[j]*EPS[j];
+			eps *= 255 * 255;
+			clock_t start_time1 = clock();
+			result = fastGuidedFilter(I, P, r, eps, s);
+			clock_t end_time1 = clock();
+			cout << "fastguidedfilter Running time is: "
+			     << static_cast<double>(end_time1 - start_time1) / CLOCKS_PER_SEC * 1000 << "ms" << endl;
+			string name = "I:color_result_s:" + to_string(s) + "_r:" + to_string(r) + "_eps:" + to_string(EPS[j]) + "^2.png";
+			imwrite(name, result);
+		}
+	}
+}
+```
+![People](./imgs/people.png)
+- I=grayscale r=2,eps=0.1^2 -0.4^2,s=1  time: 31ms
 
+![I=grayscale r=2, eps=0.1^2](./imgs/I:gray_result_s:1_r:2_eps:0.010000^2.png)
+![I=grayscaler=2, eps=0.2^2](./imgs/I:gray_result_s:1_r:2_eps:0.020000^2.png)
+![I=grayscaler=2, eps=0.4^2](./imgs/I:gray_result_s:1_r:2_eps:0.040000^2.png)
+
+- I=RGB r=2,eps=0.1^2 -0.4^2,s=1  time: 86ms
+
+![I=RGB r=2, eps=0.1^2](./imgs/I:color_result_s:1_r:2_eps:0.100000^2.png)
+![I=RGB r=2, eps=0.2^2](./imgs/I:color_result_s:1_r:2_eps:0.200000^2.png)
+![I=RGB r=2, eps=0.4^2](./imgs/I:color_result_s:1_r:2_eps:0.400000^2.png)
+
+- I=RGB r=2,eps=0.1^2 -0.4^2,s=2  time: 30ms
+
+![I=RGB r=2, eps=0.1^2](./imgs/I:color_result_s:2_r:2_eps:0.100000^2.png)
+![I=RGB r=2, eps=0.2^2](./imgs/I:color_result_s:2_r:2_eps:0.200000^2.png)
+![I=RGB r=2, eps=0.4^2](./imgs/I:color_result_s:2_r:2_eps:0.400000^2.png)
+
+- I=grayscale r=4,eps=0.1^2 -0.4^2,s=1  time: 31ms
+
+![I=grayscale r=4, eps=0.1^2](./imgs/I:gray_result_s:1_r:4_eps:0.010000^2.png)
+![I=grayscaler=4, eps=0.2^2](./imgs/I:gray_result_s:1_r:4_eps:0.020000^2.png)
+![I=grayscaler=4, eps=0.4^2](./imgs/I:gray_result_s:1_r:4_eps:0.040000^2.png)
+
+- I=RGB r=4,eps=0.1^2 -0.4^2,s=1  time: 86ms
+
+![I=RGB r=4, eps=0.1^2](./imgs/I:color_result_s:1_r:4_eps:0.100000^2.png)
+![I=RGB r=4, eps=0.2^2](./imgs/I:color_result_s:1_r:4_eps:0.200000^2.png)
+![I=RGB r=4, eps=0.4^2](./imgs/I:color_result_s:1_r:4_eps:0.400000^2.png)
+
+- I=RGB r=4,eps=0.1^2 -0.4^2,s=2  time: 30ms
+
+![I=RGB r=4, eps=0.1^2](./imgs/I:color_result_s:2_r:4_eps:0.100000^2.png)
+![I=RGB r=4, eps=0.2^2](./imgs/I:color_result_s:2_r:4_eps:0.200000^2.png)
+![I=RGB r=4, eps=0.4^2](./imgs/I:color_result_s:2_r:4_eps:0.400000^2.png)
+
+ I=grayscale r=8,eps=0.1^2 -0.4^2,s=1  time: 31ms
+ 
+![I=grayscale r=8, eps=0.1^2](./imgs/I:gray_result_s:1_r:8_eps:0.010000^2.png)
+![I=grayscaler=8, eps=0.2^2](./imgs/I:gray_result_s:1_r:8_eps:0.020000^2.png)
+![I=grayscaler=8, eps=0.4^2](./imgs/I:gray_result_s:1_r:8_eps:0.040000^2.png)
+
+- I=RGB r=8,eps=0.1^2 -0.4^2,s=1  time: 86ms
+
+![I=RGB r=8, eps=0.1^2](./imgs/I:color_result_s:1_r:8_eps:0.100000^2.png)
+![I=RGB r=8, eps=0.2^2](./imgs/I:color_result_s:1_r:8_eps:0.200000^2.png)
+![I=RGB r=8, eps=0.4^2](./imgs/I:color_result_s:1_r:8_eps:0.400000^2.png)
+
+- I=RGB r=8,eps=0.1^2 -0.4^2,s=2  time: 30ms
+
+![I=RGB r=8, eps=0.1^2](./imgs/I:color_result_s:2_r:8_eps:0.100000^2.png)
+![I=RGB r=8, eps=0.2^2](./imgs/I:color_result_s:2_r:8_eps:0.200000^2.png)
+![I=RGB r=8, eps=0.4^2](./imgs/I:color_result_s:2_r:8_eps:0.400000^2.png)
 ### Flash/no-flash denoising
 
 ```c++
