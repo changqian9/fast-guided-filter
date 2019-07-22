@@ -63,7 +63,7 @@ private:
 cv::Mat FastGuidedFilterImpl::filter(const cv::Mat &p, int depth)
 {
     cv::Mat p2 = convertTo(p, Idepth);
-    cv::resize(p2 ,p2,cv::Size(p2.cols/s,p2.rows/s),0,0,CV_INTER_NN);
+    cv::resize(p2 ,p2,cv::Size(p2.cols/s,p2.rows/s),0,0,cv::INTER_NEAREST);
     cv::Mat result;
     if (p.channels() == 1)
     {
@@ -90,7 +90,7 @@ FastGuidedFilterMono::FastGuidedFilterMono(const cv::Mat &origI, int r, double e
         this->origI = origI.clone();
     else
         this->origI = convertTo(origI, CV_32F);
-    cv::resize(this->origI ,I,cv::Size(this->origI.cols/s,this->origI.rows/s),0,0,CV_INTER_NN);
+    cv::resize(this->origI ,I,cv::Size(this->origI.cols/s,this->origI.rows/s),0,0,cv::INTER_NEAREST);
     Idepth = I.depth();
 
     mean_I = boxfilter(I, r);
@@ -110,8 +110,8 @@ cv::Mat FastGuidedFilterMono::filterSingleChannel(const cv::Mat &p) const
 
     cv::Mat mean_a = boxfilter(a, r);
     cv::Mat mean_b = boxfilter(b, r);
-    cv::resize(mean_a ,mean_a,cv::Size(origI.cols,origI.rows),0,0,CV_INTER_LINEAR);
-    cv::resize(mean_b ,mean_b,cv::Size(origI.cols,origI.rows),0,0,CV_INTER_LINEAR);
+    cv::resize(mean_a ,mean_a,cv::Size(origI.cols,origI.rows),0,0,cv::INTER_LINEAR);
+    cv::resize(mean_b ,mean_b,cv::Size(origI.cols,origI.rows),0,0,cv::INTER_LINEAR);
     return mean_a.mul(origI) + mean_b;
 }
 
@@ -126,7 +126,7 @@ FastGuidedFilterColor::FastGuidedFilterColor(const cv::Mat &origI, int r, double
     Idepth = I.depth();
 
     cv::split(I, origIchannels);
-    cv::resize(I,I,cv::Size(I.cols/s,I.rows/s),0,0,CV_INTER_NN);
+    cv::resize(I,I,cv::Size(I.cols/s,I.rows/s),0,0,cv::INTER_NEAREST);
     cv::split(I, Ichannels);
 
     mean_I_r = boxfilter(Ichannels[0], r);
@@ -186,10 +186,10 @@ cv::Mat FastGuidedFilterColor::filterSingleChannel(const cv::Mat &p) const
     cv::Mat mean_a_g = boxfilter(a_g, r);
     cv::Mat mean_a_b = boxfilter(a_b, r);
     cv::Mat mean_b = boxfilter(b, r);
-    cv::resize(mean_a_r ,mean_a_r,cv::Size(origIchannels[0].cols,origIchannels[0].rows),0,0,CV_INTER_LINEAR);
-    cv::resize(mean_a_g ,mean_a_g,cv::Size(origIchannels[1].cols,origIchannels[1].rows),0,0,CV_INTER_LINEAR);
-    cv::resize(mean_a_b ,mean_a_b,cv::Size(origIchannels[2].cols,origIchannels[2].rows),0,0,CV_INTER_LINEAR);
-    cv::resize(mean_b,mean_b,cv::Size(origIchannels[2].cols,origIchannels[2].rows),0,0,CV_INTER_LINEAR);
+    cv::resize(mean_a_r ,mean_a_r,cv::Size(origIchannels[0].cols,origIchannels[0].rows),0,0,cv::INTER_LINEAR);
+    cv::resize(mean_a_g ,mean_a_g,cv::Size(origIchannels[1].cols,origIchannels[1].rows),0,0,cv::INTER_LINEAR);
+    cv::resize(mean_a_b ,mean_a_b,cv::Size(origIchannels[2].cols,origIchannels[2].rows),0,0,cv::INTER_LINEAR);
+    cv::resize(mean_b,mean_b,cv::Size(origIchannels[2].cols,origIchannels[2].rows),0,0,cv::INTER_LINEAR);
     return (mean_a_r.mul(origIchannels[0]) +mean_a_g.mul(origIchannels[1]) +mean_a_b.mul(origIchannels[2]) + mean_b);
 
 }
