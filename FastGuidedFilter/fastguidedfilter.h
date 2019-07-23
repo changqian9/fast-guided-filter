@@ -3,6 +3,7 @@
 
 #include <opencv2/opencv.hpp>
 
+#ifdef __cplusplus
 class FastGuidedFilterImpl;
 
 class FastGuidedFilter
@@ -16,7 +17,14 @@ public:
 private:
     FastGuidedFilterImpl *impl_;
 };
+#endif
 
-cv::Mat fastGuidedFilter(const cv::Mat &I, const cv::Mat &p, int r, double eps, int s = 1,int depth = -1);
+#ifdef __cplusplus
+extern "C" {
+#endif
+    cv::Mat fastGuidedFilter(const cv::Mat &I, const cv::Mat &p, int r, double eps, int s = 1,int depth = -1);
+#ifdef __cplusplus
+}
+#endif
 
 #endif
