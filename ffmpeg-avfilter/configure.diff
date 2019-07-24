@@ -1,0 +1,22 @@
+diff --git a/configure b/configure
+index b08c6a41c4..6ee9b9ad1f 100755
+--- a/configure
++++ b/configure
+@@ -3343,7 +3343,7 @@ mptestsrc_filter_deps="gpl"
+ negate_filter_deps="lut_filter"
+ nnedi_filter_deps="gpl"
+ ocr_filter_deps="libtesseract"
+-ocv_filter_deps="libopencv"
++ocv_filter_deps="libopencv libfastguidedfilter"
+ openclsrc_filter_deps="opencl"
+ overlay_opencl_filter_deps="opencl"
+ overlay_qsv_filter_deps="libmfx"
+@@ -6006,7 +6006,7 @@ enabled libnpp            && { check_lib libnpp npp.h nppGetLibVersion -lnppig -
+                                die "ERROR: libnpp not found"; }
+ enabled libopencore_amrnb && require libopencore_amrnb opencore-amrnb/interf_dec.h Decoder_Interface_init -lopencore-amrnb
+ enabled libopencore_amrwb && require libopencore_amrwb opencore-amrwb/dec_if.h D_IF_init -lopencore-amrwb
+-enabled libopencv         && { check_header opencv2/core/core_c.h &&
++enabled libopencv         && { check_header opencv2/core/core_c.h && require_pkg_config libfastguidedfilter libfastguidedfilter fastguidedfilter.h fastguidedfilter_c &&
+                                { check_pkg_config libopencv opencv opencv2/core/core_c.h cvCreateImageHeader ||
+                                  require libopencv opencv2/core/core_c.h cvCreateImageHeader -lopencv_core -lopencv_imgproc; } ||
+                                require_pkg_config libopencv opencv opencv/cxcore.h cvCreateImageHeader; }

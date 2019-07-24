@@ -144,7 +144,7 @@ static void smooth_end_frame_filter(AVFilterContext *ctx, IplImage *inimg, IplIm
     OCVContext *s = ctx->priv;
     SmoothContext *smooth = s->priv;
     if (smooth->type == CV_FASTGUIDED) {
-        fastguidedfilter_c(inimg, outimg, smooth->param1, smooth->param2, smooth->param3);
+        fastguidedfilter_c(inimg, outimg, smooth->param1, smooth->param2, smooth->param3 * smooth->param3 * 65025.0);
     } else {
         cvSmooth(inimg, outimg, smooth->type, smooth->param1, smooth->param2, smooth->param3, smooth->param4);
     }
