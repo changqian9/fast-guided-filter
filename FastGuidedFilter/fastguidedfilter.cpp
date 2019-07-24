@@ -1,4 +1,5 @@
 #include "fastguidedfilter.h"
+#include <iostream>
 static cv::Mat boxfilter(const cv::Mat &I, int r)
 {
     cv::Mat result;
@@ -22,7 +23,7 @@ public:
     FastGuidedFilterImpl(int r, double eps,int s):r(r),eps(eps),s(s){}
     virtual ~FastGuidedFilterImpl() {}
 
-    cv::Mat filter(const cv::Mat &p, int depth);
+    int filter(cv::Mat &dst, const cv::Mat &p, int depth);
 
 protected:
     int Idepth,r,s;
@@ -60,10 +61,10 @@ private:
 };
 
 
-cv::Mat FastGuidedFilterImpl::filter(const cv::Mat &p, int depth)
+int FastGuidedFilterImpl::filter(cv::Mat &dst, const cv::Mat &p, int depth)
 {
     cv::Mat p2 = convertTo(p, Idepth);
-    cv::resize(p2 ,p2,cv::Size(p2.cols/s,p2.rows/s),0,0,cv::INTER_NEAREST);
+    cv::resize(p2, p2, cv::Size(p2.cols/s,p2.rows/s),0,0,cv::INTER_NEAREST);
     cv::Mat result;
     if (p.channels() == 1)
     {
@@ -80,7 +81,14 @@ cv::Mat FastGuidedFilterImpl::filter(const cv::Mat &p, int depth)
         cv::merge(pc, result);
     }
 
-    return convertTo(result, depth == -1 ? p.depth() : depth);
+    depth = depth == -1 ? p.depth() : depth;
+
+    if (result.depth() == depth) {
+        dst = result;
+    } else {
+        result.convertTo(dst, depth);
+    }
+    return 0;
 }
 
 FastGuidedFilterMono::FastGuidedFilterMono(const cv::Mat &origI, int r, double eps,int s):FastGuidedFilterImpl(r,eps,s)
@@ -210,12 +218,23 @@ FastGuidedFilter::~FastGuidedFilter()
     delete impl_;
 }
 
-cv::Mat FastGuidedFilter::filter(const cv::Mat &p, int depth) const
+int FastGuidedFilter::filter(cv::Mat &dst, const cv::Mat &p, int depth) const
 {
-    return impl_->filter(p, depth);
+    return impl_->filter(dst, p, depth);
 }
 
-cv::Mat fastGuidedFilter(const cv::Mat &I, const cv::Mat &p, int r, double eps, int s,int depth)
+cv::Mat fastGuidedFilter(const cv::Mat &I, int r, double eps, int s)
 {
-    return FastGuidedFilter(I, r, eps,s).filter(p, depth);
+    cv::Mat result;
+    const cv::Mat &p = I;
+    FastGuidedFilter(I, r, eps,s).filter(result, p, -1);
+    return result;
+}
+
+int fastguidedfilter_c(IplImage *inimg, IplImage *outimg, int r, int s, double eps) {
+    cv::Mat result = cv::cvarrToMat(outimg);
+    cv::Mat I = cv::cvarrToMat(inimg);
+    FastGuidedFilter(I, r, eps,s).filter(result, I, -1);
+    std::cout << "fast guided filter: " << r << " " << eps << " " << s << std::endl;
+    return 0;
 }

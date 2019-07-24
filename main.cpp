@@ -3,7 +3,7 @@ using namespace std;
 #define DEBUG
 const int s = 1, r = 8;
 const float eps = 0.07 * 0.07 * 255 * 255;
-const int output_width = 960, output_height = 540;
+const int output_width = 854, output_height = 480;
 
 int main(int argc, char *argv[]) {
     if (argc < 3) {
@@ -27,7 +27,7 @@ int main(int argc, char *argv[]) {
 #ifdef DEBUG
             clock_t start_time1 = clock();
 #endif
-            output = fastGuidedFilter(I, input_rz, r, eps, s);
+            output = fastGuidedFilter(I, r, eps, s);
 #ifdef DEBUG
             clock_t end_time1 = clock();
             cout << "Running time is: "
