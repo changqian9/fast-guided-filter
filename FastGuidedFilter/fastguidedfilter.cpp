@@ -79,15 +79,16 @@ class Parallel_process : public cv::ParallelLoopBody
 
 class FastGuidedFilterImpl
 {
+protected:
+    int Idepth, r;
+    double eps;
+    int s;
+
 public:
     FastGuidedFilterImpl(int r, double eps,int s):r(r),eps(eps),s(s){}
     virtual ~FastGuidedFilterImpl() {}
 
     int filter(cv::Mat &dst, const cv::Mat &p, int depth);
-
-protected:
-    int Idepth,r,s;
-    double eps;
 
 private:
     virtual cv::Mat filterSingleChannel(const cv::Mat &p) const = 0;
@@ -151,9 +152,9 @@ int FastGuidedFilterImpl::filter(cv::Mat &dst, const cv::Mat &p, int depth)
         process.invgb = filter_instance->invgb;
         process.invbb = filter_instance->invbb;
 
-        cv::parallel_for_(cv::Range(0, 3), process);
-        //for (std::size_t i = 0; i < pc.size(); ++i)
-        //    pc[i] = filterSingleChannel(pc[i]);
+        //cv::parallel_for_(cv::Range(0, 3), process);
+        for (std::size_t i = 0; i < pc.size(); ++i)
+            pc[i] = filterSingleChannel(pc[i]);
         /*
         std::vector<std::thread> workers;
         for (std::size_t i = 0; i < pc.size(); ++i)

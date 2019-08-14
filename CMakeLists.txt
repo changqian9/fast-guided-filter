@@ -3,6 +3,14 @@ set(PROJECT_NAME fastguidedfilter)
 set(APP_NAME fgfapp)
 project(${PROJECT_NAME})
 
+if(NOT CMAKE_BUILD_TYPE)
+  set(CMAKE_BUILD_TYPE Release)
+endif()
+
+set(CMAKE_CXX_FLAGS "-Wall -Wextra")
+set(CMAKE_CXX_FLAGS_DEBUG "-g")
+set(CMAKE_CXX_FLAGS_RELEASE "-O3")
+
 set(CPACK_GENERATOR "DEB")
 set(CPACK_DEBIAN_PACKAGE_MAINTAINER "wangxinyu")
 set(CPACK_PACKAGE_NAME "${PROJECT_NAME}")
