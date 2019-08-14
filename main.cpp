@@ -1,8 +1,8 @@
 #include "FastGuidedFilter/fastguidedfilter.h"
 using namespace std;
 #define DEBUG
-const int s = 1, r = 8;
-const float eps = 0.07 * 0.07 * 255 * 255;
+const int s = 2, r = 8;
+const float eps = 0.04 * 0.04 * 255 * 255;
 const int output_width = 854, output_height = 480;
 
 int main(int argc, char *argv[]) {
@@ -18,6 +18,8 @@ int main(int argc, char *argv[]) {
         int width = int( cap.get( cv::CAP_PROP_FRAME_WIDTH ) + 0.5 );
         int height = int( cap.get( cv::CAP_PROP_FRAME_HEIGHT ) + 0.5 );
         out.open(argv[2], cv::VideoWriter::fourcc('a', 'v', 'c', '1'), fps, cv::Size(output_width, output_height));
+    } else {
+        cerr << "Open file " << argv[1] << "failed. " << std::endl;
     }
     if (out.isOpened()) {
         cap >> input;
@@ -27,7 +29,8 @@ int main(int argc, char *argv[]) {
 #ifdef DEBUG
             clock_t start_time1 = clock();
 #endif
-            output = fastGuidedFilter(I, r, eps, s);
+            FastGuidedFilter fgfilter(I, r, eps,s);
+            fgfilter.filter(output, I, -1);
 #ifdef DEBUG
             clock_t end_time1 = clock();
             cout << "Running time is: "
