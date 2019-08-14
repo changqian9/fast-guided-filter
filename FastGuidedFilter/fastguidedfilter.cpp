@@ -180,7 +180,7 @@ FastGuidedFilterMono::FastGuidedFilterMono(const cv::Mat &origI, int r, double e
     if (origI.depth() == CV_32F || origI.depth() == CV_64F)
         this->origI = origI.clone();
     else
-        this->origI = convertTo(origI, CV_32F);
+        origI.convertTo(this->origI, CV_32F);
     cv::resize(this->origI ,I,cv::Size(this->origI.cols/s,this->origI.rows/s),0,0,cv::INTER_NEAREST);
     Idepth = I.depth();
 
